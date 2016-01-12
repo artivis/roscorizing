@@ -110,12 +110,8 @@ function roscorizing()
 
     uri_local $ROSCORE_PORT
 
-	# Todo : fix quote
-    command=$@
-
-    #echo "About to exec : $command"
-
-    ($command)
+    # Run command
+    $("$@")
 
     # Gives some time to the command to shutdown
     sleep 1;
