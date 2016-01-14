@@ -1,6 +1,7 @@
 #! /bin/bash
 #
-# Author : Jeremie Deray
+# Authors : Jeremie Deray
+#         : Enrique Fernandez Perdomo
 
 #set -e
 #set -o pipefail
