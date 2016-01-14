@@ -111,7 +111,7 @@ function roscorizing()
     uri_local $ROSCORE_PORT
 
     # Run command
-    $("$@")
+    ("$@")
 
     # Gives some time to the command to shutdown
     sleep 1;
