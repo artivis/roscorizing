@@ -1,6 +1,7 @@
 #! /bin/bash
 #
-# Author : Jeremie Deray
+# Authors : Jeremie Deray
+#         : Enrique Fernandez Perdomo
 
 #set -e
 #set -o pipefail
@@ -72,7 +73,7 @@ function find_available_port()
 
   if [[ $# == 1 ]] && [[ ${1} > 11311 ]]
   then
-	local_port=${1}
+    local_port=${1}
   else
     local_port=11322
   fi
@@ -92,7 +93,7 @@ function roscorizing()
   then
     echo "usage: roscorizing ros_cmd" 1>&2
     return 1
-  else    
+  else
     ROSCORE_PORT=$(find_available_port)
 
     # '&' (ampersand) is a builtin control operator
@@ -101,7 +102,7 @@ function roscorizing()
 
     #trap 'echo "trapping roscore"; kill_roscore_by_port $ROSCORE_PORT' EXIT SIGINT SIGTERM SIGHUP
 
-    # Gives some time to roscore to starts 
+    # Gives some time to roscore to starts
     sleep 1;
 
     ROSCORE_PID=$(get_roscore_pid_by_port $ROSCORE_PORT)
@@ -110,14 +111,10 @@ function roscorizing()
 
     uri_local $ROSCORE_PORT
 
-	# Todo : fix quote
-    command=$@
+    # Run command
+    ("$@")
 
-    #echo "About to exec : $command"
-
-    ($command)
-
-    # Gives some time to $command to shutdown 
+    # Gives some time to the command to shutdown
     sleep 1;
 
     kill_roscore_by_port $ROSCORE_PORT
